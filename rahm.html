@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Rahma</title>
+
+<style>
+
+html,body{
+height:100%;
+margin:0;
+font-family:Arial;
+text-align:center;
+background:linear-gradient(white,#ffd6e7);
+overflow:hidden;
+}
+
+.step{
+display:none;
+padding-top:80px;
+}
+
+.active{
+display:block;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+margin:10px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.yes{background:#4CAF50;color:white;}
+.no{background:#ff4d6d;color:white;}
+
+input{
+padding:10px;
+margin:5px;
+width:80px;
+text-align:center;
+}
+
+.media{
+padding:0;
+margin:20px auto;
+width:auto;
+}
+
+#counter{
+margin-top:40px;
+font-size:30px;
+}
+
+.timeBox{
+display:inline-block;
+margin:10px;
+padding:20px;
+background:white;
+border-radius:10px;
+font-size:30px;
+box-shadow:0 0 10px #ccc;
+}
+
+.heart{
+position:fixed;
+color:#ff4d6d;
+font-size:20px;
+animation:fall 8s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
+}
+
+.musicBtn{
+position:fixed;
+top:10px;
+right:10px;
+background:#ff4d6d;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<button class="musicBtn" onclick="toggleMusic()">Music</button>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c1c6a1c7a.mp3">
+</audio>
+
+<!-- STEP 1 -->
+
+<div id="step1" class="step active">
+
+<h1>Welcome</h1>
+
+<p>I prepared something special for someone important.</p>
+
+<div class="media">
+<img src="html.gif2.gif" width="300">
+</div>
+
+<button onclick="next(2)">Continue</button>
+
+</div>
+
+<!-- STEP 2 -->
+
+<div id="step2" class="step">
+
+<h2>Are you Rahma?</h2>
+
+<button class="yes" onclick="next(3)">Yes</button>
+
+<button id="no1" class="no" onmouseover="moveNo('no1')">No</button>
+
+</div>
+
+<!-- STEP 3 -->
+
+<div id="step3" class="step">
+
+<h2>Enter your birthday</h2>
+
+<input id="day" placeholder="Day">
+<input id="month" placeholder="Month">
+<input id="year" placeholder="Year">
+
+<br>
+
+<button onclick="checkBirthday()">Confirm</button>
+
+</div>
+
+<!-- STEP 4 -->
+
+<div id="step4" class="step">
+
+<p style="font-size:20px;max-width:700px;margin:auto">
+
+Hello Rahma ❤️
+
+I'm Abdou.
+
+There is something I wanted to tell you for days but I didn't know if this was the right moment.
+
+I got used to talking with you and little by little you became someone special to me.
+
+I admire many things about you: your beauty, your personality and the way you think.
+
+Your way of thinking is very similar to mine in many things and that made me feel close to you.
+
+There are also many other things I like about you that I can't explain in one message.
+
+You once told me that you don't have an **Eren** in your life 😄
+
+So I want to ask you something...
+
+Would you accept that I become that person?
+
+In other words…  
+I would really like you to be my girlfriend.
+
+But I also hope this message will never make me lose our friendship.
+
+</p>
+
+<div class="media">
+<img src="html.gif1.gif" width="200">
+</div>
+
+<button id="yesBtn" class="yes" onclick="accepted()">Yes</button>
+<button id="no2" class="no" onclick="shrinkNo()" onmouseover="moveNo('no2')">No</button>
+
+</div>
+
+<!-- STEP 5 -->
+
+<div id="step5" class="step">
+
+<h1>I’m really happy with your answer ❤️</h1>
+
+<p>This is how long we have known each other</p>
+
+<div id="counter">
+
+<div class="timeBox">
+<span id="days"></span><br>Days
+</div>
+
+<div class="timeBox">
+<span id="hours"></span><br>Hours
+</div>
+
+<div class="timeBox">
+<span id="minutes"></span><br>Minutes
+</div>
+
+<div class="timeBox">
+<span id="seconds"></span><br>Seconds
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function next(n){
+document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"))
+document.getElementById("step"+n).classList.add("active")
+}
+
+function checkBirthday(){
+
+let d=day.value
+let m=month.value
+let y=year.value
+
+if(d==11 && m==4 && y==2006){
+next(4)
+}else{
+alert("Wrong birthday. This page is not for you.")
+}
+
+}
+
+let scaleNo=1
+
+function shrinkNo(){
+
+let no=document.getElementById("no2")
+let yes=document.getElementById("yesBtn")
+
+scaleNo*=0.7
+
+no.style.transform="scale("+scaleNo+")"
+yes.style.transform="scale("+(1/scaleNo)+")"
+
+no.innerText="Think again"
+
+}
+
+function moveNo(id){
+
+let btn=document.getElementById(id)
+
+let x=Math.random()*(window.innerWidth-100)
+let y=Math.random()*(window.innerHeight-50)
+
+btn.style.position="absolute"
+btn.style.left=x+"px"
+btn.style.top=y+"px"
+
+}
+
+function accepted(){
+next(5)
+}
+
+let start=new Date("December 14, 2025 10:00:00")
+
+function updateCounter(){
+
+let now=new Date()
+
+let diff=now-start
+
+let d=Math.floor(diff/(1000*60*60*24))
+let h=Math.floor(diff/(1000*60*60))%24
+let m=Math.floor(diff/(1000*60))%60
+let s=Math.floor(diff/1000)%60
+
+days.innerText=d
+hours.innerText=h
+minutes.innerText=m
+seconds.innerText=s
+
+}
+
+setInterval(updateCounter,1000)
+
+function toggleMusic(){
+
+let music=document.getElementById("music")
+
+if(music.paused){
+music.play()
+}else{
+music.pause()
+}
+
+}
+
+/* قلوب متحركة */
+
+setInterval(()=>{
+
+let heart=document.createElement("div")
+
+heart.className="heart"
+heart.innerHTML="❤"
+
+heart.style.left=Math.random()*100+"vw"
+heart.style.fontSize=(Math.random()*20+10)+"px"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{heart.remove()},8000)
+
+},300)
+
+</script>
+
+</body>
+</html>
